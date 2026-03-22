@@ -263,7 +263,7 @@ export const  App=()=> {
 
   const saveData = async () => {
     try {
-      await axios.post("http://localhost:5000/api/save", { prompt: input, response: result });
+      await axios.post("https://future-blink-backend.onrender.com/api/save", { prompt: input, response: result });
     } catch { /* silent */ }
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
