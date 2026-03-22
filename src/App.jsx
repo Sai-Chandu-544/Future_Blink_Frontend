@@ -246,28 +246,19 @@ export const  App=()=> {
   }, [input, result, loading]);
 
   const runFlow = async () => {
-  if (!input.trim()) return;
+    if (!input.trim()) return;
+    setLoading(true);
+    setResult("");
+    try {
+      const res = await axios.post("https://future-blink-backend.onrender.com/api/ask-ai", { prompt: input });
+      setResult(res.data.result);
+    } catch {
+      setResult("Error fetching response. Please check your backend.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  setLoading(true);
-  setResult("");
-
-  try {
-    const res = await axios.post(
-      "https://future-blink-backend.onrender.com/api/ask-ai",
-      { prompt: input }
-    );
-
-    console.log("API RESPONSE:", res.data);
-
-    setResult(res.data.result || res.data.response || "No response");
-
-  } catch (err) {
-    console.error("ERROR:", err.response?.data || err.message);
-    setResult("Error: " + (err.response?.data?.error || err.message));
-  } finally {
-    setLoading(false);
-  }
-};
   
 
   const saveData = async () => {
