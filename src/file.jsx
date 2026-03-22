@@ -215,7 +215,7 @@ function SidebarContent() {
 }
 
 
-export const  AIFlowBuilder=()=> {
+export const  App=()=> {
   const [input, setInput]         = useState("");
   const [result, setResult]       = useState("");
   const [loading, setLoading]     = useState(false);
@@ -250,7 +250,7 @@ export const  AIFlowBuilder=()=> {
     setLoading(true);
     setResult("");
     try {
-      const res = await axios.post("http://localhost:5000/api/ask-ai", { prompt: input });
+      const res = await axios.post("https://future-blink-backend.onrender.com/api/ask-ai", { prompt: input });
       setResult(res.data.result);
     } catch {
       setResult("Error fetching response. Please check your backend.");
